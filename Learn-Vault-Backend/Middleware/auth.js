@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 
-var jwtSecret = "mysecrettoken";
+const dotenv = require("dotenv");
+dotenv.config();
+
+const jwtSecret = process.env.JWT_SECRET; // Load the JWT secret from the environment variable
 
 module.exports = function (req, res, next) {
   //Get token from header

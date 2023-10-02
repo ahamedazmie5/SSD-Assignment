@@ -3,8 +3,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const User = require("../models/User");
+const dotenv = require("dotenv");
 
-var jwtSecret = "mysecrettoken";
+dotenv.config();
+
+const jwtSecret = process.env.JWT_SECRET;
 
 const registerUser = async (req, res) => {
   const errors = validationResult(req);
