@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet"); // Import helmet middleware
 const UserRoutes = require("./routes/UserRoutes");
 const RegRoutes = require("./routes/RegNoRoutes");
+const csrf = require("csurf"); // Import csurf
 dotenv.config();
 
 const app = express();

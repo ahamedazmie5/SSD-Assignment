@@ -2,12 +2,24 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const { body, param } = require("express-validator"); // Import express-validator
 const User = require("../models/User");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
 const jwtSecret = process.env.JWT_SECRET;
+
+// Input validation middleware for registerUser
+const registerValidation = [
+    body("Fullname", "Name field is required (Min 3 characters)").isLength({
+      min: 3,
+    }),
+    body("email", "Invalid email address").isEmail(),
+    body("password", "Password field is required (Min 7 characters)").isLength({
+      min: 7,
+    }),
+  ];
 
 const registerUser = async (req, res) => {
   const errors = validationResult(req);
@@ -70,6 +82,11 @@ const registerUser = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+// Input validation middleware for loginUser
+const loginValidation = [
+  body("email", "Invalid email address").isEmail(),
+  body("password", "Password is required").exists(),
+];
 
 const authUser = async (req, res) => {
   try {
