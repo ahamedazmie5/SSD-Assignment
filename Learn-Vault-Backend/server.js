@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const helmet = require("helmet"); // Import helmet middleware
+const csrf = require("csurf"); // Import csurf
 const UserRoutes = require("./routes/UserRoutes");
 const RegRoutes = require("./routes/RegNoRoutes");
 dotenv.config();
