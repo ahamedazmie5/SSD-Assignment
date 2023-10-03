@@ -3,10 +3,12 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const helmet = require("helmet"); // Import helmet middleware
+const helmet = require("helmet");
+const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
 const UserRoutes = require("./routes/UserRoutes");
 const RegRoutes = require("./routes/RegNoRoutes");
-const csrf = require("csurf"); // Import csurf
+
 dotenv.config();
 
 const app = express();
@@ -20,8 +22,7 @@ app.use(
     credentials: true,
   })
 );
-
-// Use the helmet middleware to remove X-Powered-By header
+app.use(cookieParser());
 app.use(helmet());
 
 const PORT = process.env.PORT || 8000;
@@ -45,6 +46,17 @@ mongoose.connect(
     }
   }
 );
+
+const csrfProtection = csrf({ cookie: true }); // Enable CSRF protection and store the token in a cookie
+
+// Use CSRF middleware after cookie-parser
+app.use(csrfProtection);
+
+// Add a middleware to set the CSRF token in a cookie
+app.use((req, res, next) => {
+  res.cookie("XSRF-TOKEN", req.csrfToken());
+  next();
+});
 
 // User routes
 app.use("/user", UserRoutes);
