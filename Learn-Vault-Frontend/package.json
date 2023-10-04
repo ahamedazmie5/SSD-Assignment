@@ -20,7 +20,7 @@
     "expo-status-bar": "~1.4.0",
     "install": "^0.13.0",
     "npx": "^10.2.2",
-    "react": "^18.0.0",
+    "react": "^18.2.0",
     "react-native": "^0.69.6",
     "react-native-elements": "1.0.0",
     "react-native-gesture-handler": "^2.5.0",
