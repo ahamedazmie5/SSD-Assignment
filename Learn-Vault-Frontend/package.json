@@ -21,7 +21,7 @@
     "install": "^0.13.0",
     "npx": "^10.2.2",
     "react": "^18.0.0",
-    "react-native": "^0.69.6",
+    "react-native": "^0.71.0",
     "react-native-elements": "1.0.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-paper": "^4.12.5",
